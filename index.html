@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Raza Saleem — AI-Augmented Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10141c;
+    --surface: #171d28;
+    --surface-2: #1d2433;
+    --border: #2a3344;
+    --border-soft: #232a39;
+    --text: #e7e3d8;
+    --text-muted: #8b93a7;
+    --text-faint: #5c6478;
+    --accent: #e1a94c;
+    --accent-soft: rgba(225,169,76,0.14);
+    --accent-2: #5fb3b3;
+    --accent-2-soft: rgba(95,179,179,0.14);
+    --font-display: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--border-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+    color: var(--text);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-inline: clamp(20px, 5vw, 48px);
+  }
+
+  a{ color: inherit; }
+
+  .mono{ font-family: var(--font-mono); }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  /* ---------- nav ---------- */
+  header.site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(16,20,28,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+  }
+  .nav-mark{
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-mark span{ color: var(--accent); }
+  .nav-links{
+    display: flex;
+    gap: clamp(14px, 3vw, 30px);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: var(--text-muted);
+    padding-block: 4px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .nav-links a:hover{ color: var(--text); border-color: var(--accent); }
+  .nav-links li:first-child a::before{ content: "// "; color: var(--accent-2); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block: clamp(56px, 10vw, 104px) clamp(48px, 8vw, 80px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .hero .eyebrow{ margin-bottom: 22px; }
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 4.1rem);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .hero .role-line{
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 0 30px;
+    text-wrap: balance;
+  }
+  .hero .role-line strong{ color: var(--text); font-weight: 600; }
+
+  .hero-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin-bottom: 40px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .pill{
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 6px 11px;
+    color: var(--text-muted);
+    background: var(--surface);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .pill .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 0 3px var(--accent-2-soft);
+    flex: none;
+  }
+
+  /* signal path diagram */
+  .signal-path{
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 4px;
+    padding: 20px clamp(16px, 3vw, 26px);
+    overflow-x: auto;
+  }
+  .signal-path-label{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 14px;
+  }
+  .signal-row{
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+  }
+  .signal-node{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 13px;
+    white-space: nowrap;
+  }
+  .signal-arrow{
+    font-family: var(--font-mono);
+    color: var(--accent);
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding-block: clamp(52px, 9vw, 88px); border-bottom: 1px solid var(--border-soft); }
+  section:last-of-type{ border-bottom: none; }
+  .section-head{ margin-bottom: clamp(28px, 5vw, 42px); }
+  .section-head h2{
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin: 14px 0 0;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+  .about-grid p{
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    max-width: 62ch;
+    margin: 0 0 16px;
+  }
+  .about-grid p strong{ color: var(--text); font-weight: 600; }
+  .about-stats{
+    display: grid;
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--surface);
+    padding: 16px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .stat .k{ font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-faint); letter-spacing: 0.05em; text-transform: uppercase; }
+  .stat .v{ font-family: var(--font-mono); font-size: 0.86rem; color: var(--text); text-align: right; }
+
+  /* ---------- stack ---------- */
+  .layer-list{ display: flex; flex-direction: column; gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); border-radius: 4px; overflow: hidden; }
+  .layer{
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 18px;
+    padding: 18px clamp(16px,3vw,24px);
+  }
+  .layer-name{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    padding-top: 3px;
+  }
+  .layer-items{ display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 6px 11px;
+    white-space: nowrap;
+  }
+
+  /* ---------- work ---------- */
+  .card-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .card{
+    background: var(--surface);
+    padding: 24px clamp(18px,3vw,26px);
+    position: relative;
+  }
+  .card::before{
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 16px; height: 16px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .card-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .card h3{
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .status{
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    white-space: nowrap;
+    padding-top: 3px;
+    flex: none;
+  }
+  .card .client{
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-faint);
+    margin: 0 0 12px;
+  }
+  .card p.desc{
+    color: var(--text-muted);
+    font-size: 0.93rem;
+    margin: 0 0 16px;
+    max-width: 52ch;
+  }
+  .card .stack-tags, .exp-item .stack-tags{ display: flex; flex-wrap: wrap; gap: 7px; }
+  .card .stack-tags span, .exp-item .stack-tags span{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 4px 8px;
+  }
+
+  /* ---------- experience ---------- */
+  .exp-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .exp-item{
+    background: var(--surface);
+    padding: 24px clamp(18px,3vw,26px);
+    position: relative;
+  }
+  .exp-item::before{
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 16px; height: 16px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .exp-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .exp-head h3{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .exp-company{
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    margin: 0;
+  }
+  .exp-dates{
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--accent-2);
+    white-space: nowrap;
+    padding-top: 4px;
+    flex: none;
+  }
+  .exp-bullets{
+    margin: 0 0 16px;
+    padding-left: 1.15em;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .exp-bullets li{
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    max-width: 70ch;
+  }
+  .exp-bullets li::marker{ color: var(--accent); }
+
+  .earlier-list{
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .earlier-row{
+    background: var(--surface);
+    padding: 15px clamp(16px,3vw,24px);
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .earlier-row .name{ font-weight: 600; font-size: 0.94rem; }
+  .earlier-row .desc{ color: var(--text-muted); font-size: 0.88rem; }
+
+  /* ---------- contact ---------- */
+  .contact-panel{
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 4px;
+    padding: clamp(26px, 5vw, 44px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 26px;
+    position: relative;
+  }
+  .contact-panel::before{
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 18px; height: 18px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .contact-panel::after{
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 18px; height: 18px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .contact-copy h2{
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    margin: 12px 0 12px;
+    font-weight: 600;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .contact-copy p{
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0;
+    font-size: 0.98rem;
+  }
+  .contact-actions{ display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--bg);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: filter 0.15s ease;
+  }
+  .btn:hover{ filter: brightness(1.08); }
+  .btn.ghost{
+    color: var(--text);
+    background: transparent;
+    border-color: var(--border);
+  }
+  .btn.ghost:hover{ border-color: var(--accent-2); color: var(--accent-2); filter: none; }
+
+  footer{
+    padding-block: 30px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-faint);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 720px){
+    .nav-links{ gap: 14px; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .layer{ grid-template-columns: 1fr; gap: 10px; }
+    .card-grid{ grid-template-columns: 1fr; }
+    .earlier-row{ grid-template-columns: 1fr; gap: 4px; }
+    .contact-panel{ flex-direction: column; align-items: flex-start; }
+    .contact-actions{ width: 100%; }
+    .btn{ width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 460px){
+    .signal-arrow{ padding: 0 6px; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <div class="nav-mark">ali-raza<span>.io</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#work">work</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">Gujrat, Punjab, Pakistan</div>
+    <h1>Ali Raza Saleem</h1>
+    <p class="role-line">AI-Augmented Full Stack Developer building <strong>MERN applications and production LLM features</strong> — from REST API to deployed AI-powered UI.</p>
+
+    <div class="hero-meta">
+      <span class="pill"><span class="dot"></span>8+ years full-stack</span>
+      <span class="pill"><span class="dot"></span>MERN + AI / LLM</span>
+      <span class="pill"><span class="dot"></span>Available from Oct 2026</span>
+      <span class="pill"><span class="dot"></span>Full-time or contract</span>
+    </div>
+
+    <div class="signal-path">
+      <div class="signal-path-label">// typical ai-augmented request path</div>
+      <div class="signal-row">
+        <span class="signal-node">React / Next.js</span>
+        <span class="signal-arrow">&#8594;</span>
+        <span class="signal-node">Node / Express API</span>
+        <span class="signal-arrow">&#8594;</span>
+        <span class="signal-node">MongoDB / MySQL</span>
+        <span class="signal-arrow">&#8594;</span>
+        <span class="signal-node">LangChain / RAG</span>
+        <span class="signal-arrow">&#8594;</span>
+        <span class="signal-node">OpenAI / Multi-LLM &#8594; n8n / MCP</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">About</div>
+      <h2>8+ years building web platforms — now shipping production AI features on top of them.</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm an <strong>AI-Augmented Full Stack Developer</strong> based in Gujrat, Punjab, with <strong>8+ years</strong> of professional experience across the MERN stack, PHP, and the last several years focused on <strong>AI and automation engineering</strong>. I design and ship production AI features end to end — chatbots and voice assistants with STT/TTS pipelines, multi-LLM orchestration with LangChain, RAG with vector-based semantic search, tool-based AI agents in n8n, and MCP servers exposing internal tools to AI assistants.</p>
+        <p>Equally strong on the platform side: I owned the full API infrastructure at Nayyar Technologies — designing, securing and maintaining public, protected and cross-domain REST APIs with JWT and Passport.js, and shipping a whole suite of builder and management systems (WebPage Builder, Widget Builder, Query Builder, Menu Manager, Template System, Subscription &amp; Plan Management, and more).</p>
+        <p>BSc Computer Science — <strong>Silver Medalist</strong> (CGPA 3.92/4.00). <strong>Available for full-time roles or freelance / contract client work from October 2026.</strong></p>
+      </div>
+      <div class="about-stats mono">
+        <div class="stat"><span class="k">Experience</span><span class="v">8+ yrs</span></div>
+        <div class="stat"><span class="k">Focus</span><span class="v">AI + MERN full-stack</span></div>
+        <div class="stat"><span class="k">Latest</span><span class="v">Sr. Dev @ Nayyar Tech</span></div>
+        <div class="stat"><span class="k">Education</span><span class="v">BSc CS — Silver Medal</span></div>
+        <div class="stat"><span class="k">Based in</span><span class="v">Gujrat, PK</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Stack</div>
+      <h2>What I build with, by layer</h2>
+    </div>
+    <div class="layer-list">
+      <div class="layer">
+        <div class="layer-name">Client</div>
+        <div class="layer-items">
+          <span class="chip">React.js</span>
+          <span class="chip">Next.js</span>
+          <span class="chip">JavaScript (ES6+)</span>
+          <span class="chip">AngularJS</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">HTML5 / CSS3</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">Server</div>
+        <div class="layer-items">
+          <span class="chip">Node.js</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">REST API Design</span>
+          <span class="chip">JWT</span>
+          <span class="chip">Passport.js</span>
+          <span class="chip">Core PHP</span>
+          <span class="chip">CodeIgniter</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">Data</div>
+        <div class="layer-items">
+          <span class="chip">MongoDB</span>
+          <span class="chip">Mongoose ODM</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">SQLite</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">AI &amp; Automation</div>
+        <div class="layer-items">
+          <span class="chip">OpenAI API</span>
+          <span class="chip">LangChain</span>
+          <span class="chip">RAG</span>
+          <span class="chip">Vector Embeddings</span>
+          <span class="chip">Multi-LLM Orchestration</span>
+          <span class="chip">MCP Servers</span>
+          <span class="chip">n8n</span>
+          <span class="chip">Node-RED</span>
+          <span class="chip">STT / TTS Pipelines</span>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="layer-name">Platform</div>
+        <div class="layer-items">
+          <span class="chip">AWS</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Git</span>
+          <span class="chip">Linux</span>
+          <span class="chip">Stripe</span>
+          <span class="chip">PayPal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Experience</div>
+      <h2>Three roles, one thread: full-stack + AI</h2>
+    </div>
+    <div class="exp-list">
+      <article class="exp-item">
+        <div class="exp-head">
+          <div>
+            <h3>Sr. Full Stack Developer</h3>
+            <p class="exp-company mono">Nayyar Technologies Pvt. Ltd. &middot; Lahore, Pakistan</p>
+          </div>
+          <span class="exp-dates">Oct 2018 &ndash; Sep 2026</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built AI chatbots, chat assistants and voice chatbots &mdash; including full STT/TTS pipelines for real-time conversational interfaces.</li>
+          <li>Designed multi-LLM systems using OpenAI and LangChain, combining RAG and vector-based semantic search for multi-step reasoning and tool use.</li>
+          <li>Built tool-based AI agents in n8n and LangChain that generate complete business websites end-to-end from fed business information.</li>
+          <li>Built an MCP (Model Context Protocol) system exposing internal tools and data sources as callable functions for AI assistants.</li>
+          <li>Shipped an AI website builder, AI content generator, AI business landing page generator, and an AI social-media pipeline that auto-publishes to connected platforms.</li>
+          <li>Owned the full API server for the company&rsquo;s suite of apps: designed, secured and maintained public, protected and cross-domain REST APIs with JWT and Passport.js auth.</li>
+          <li>Built and maintained a full suite of builder &amp; management systems: WebPage Builder, Widget Builder, Query Builder, Menu / Media / Mail / Layout / Workflow Manager, Order, Subscription &amp; Plan Management, Template System, Knowledge Base, Support Tickets, Team Management.</li>
+          <li>Wrote custom parsers and scrapers; integrated Stripe and PayPal; diagnosed production concurrency and deadlock scenarios.</li>
+        </ul>
+        <div class="stack-tags">
+          <span>Node.js</span><span>Express.js</span><span>LangChain</span><span>OpenAI</span><span>MCP</span><span>n8n</span><span>MongoDB</span><span>JWT</span>
+        </div>
+      </article>
+
+      <article class="exp-item">
+        <div class="exp-head">
+          <div>
+            <h3>Full Stack Developer</h3>
+            <p class="exp-company mono">Henoz Developers &middot; Lahore, Pakistan</p>
+          </div>
+          <span class="exp-dates">Aug 2018 &ndash; Oct 2018</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Worked on the website builder, widget builder and feature builder modules for the company&rsquo;s core product suite.</li>
+          <li>Contributed to front-end and back-end feature development in a fast-paced product environment.</li>
+        </ul>
+        <div class="stack-tags">
+          <span>JavaScript</span><span>Node.js</span><span>Web Builder</span><span>Widget Builder</span>
+        </div>
+      </article>
+
+      <article class="exp-item">
+        <div class="exp-head">
+          <div>
+            <h3>Full Stack Developer <span class="mono" style="color:var(--text-faint);font-weight:400;">(Part-time)</span></h3>
+            <p class="exp-company mono">Bespider Pvt. Ltd. &middot; Pakistan</p>
+          </div>
+          <span class="exp-dates">2016 &ndash; Aug 2018</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed Bespider from scratch: a turnkey platform for building personal, portfolio, company, e-commerce and blog sites.</li>
+          <li>Built personal portfolio generators, an e-commerce store generator and a reusable template system for fast turnkey deployment.</li>
+          <li>Built custom and REST APIs powering the platform&rsquo;s site generation and management features.</li>
+          <li>Worked within a custom MVC framework; integrated Stripe payments and a domain-name management plugin.</li>
+        </ul>
+        <div class="stack-tags">
+          <span>PHP</span><span>MVC</span><span>MySQL</span><span>REST APIs</span><span>Stripe</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="work" class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Work</div>
+      <h2>Featured projects</h2>
+    </div>
+
+    <div class="card-grid">
+      <article class="card">
+        <div class="card-top">
+          <h3>AI Website Generation Agents</h3>
+          <span class="status mono">Production</span>
+        </div>
+        <p class="client mono">Nayyar Technologies &middot; Tool-based AI agents</p>
+        <p class="desc">Tool-based agents in n8n and LangChain that take fed business information and generate a complete business website end-to-end &mdash; automating a workflow that was previously manual, step by step.</p>
+        <div class="stack-tags">
+          <span>n8n</span><span>LangChain</span><span>OpenAI</span><span>Multi-LLM</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>AI Voice &amp; Chat Assistant Suite</h3>
+          <span class="status mono">Production</span>
+        </div>
+        <p class="client mono">Nayyar Technologies &middot; Conversational AI</p>
+        <p class="desc">Conversational assistants combining LLM reasoning with speech-to-text and text-to-speech pipelines, supporting text and voice channels with context retention across turns.</p>
+        <div class="stack-tags">
+          <span>OpenAI</span><span>STT / TTS</span><span>LangChain</span><span>RAG</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>MCP Server System</h3>
+          <span class="status mono">Production</span>
+        </div>
+        <p class="client mono">Nayyar Technologies &middot; Model Context Protocol</p>
+        <p class="desc">A Model Context Protocol server exposing internal platform tools and data sources as callable functions for AI assistants and downstream agent workflows.</p>
+        <div class="stack-tags">
+          <span>MCP</span><span>Node.js</span><span>Tool Calling</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>AI Social Media Pipeline</h3>
+          <span class="status mono">Production</span>
+        </div>
+        <p class="client mono">Nayyar Technologies &middot; AI content automation</p>
+        <p class="desc">End-to-end pipeline generating social posts with AI and submitting them automatically to connected social platforms &mdash; hands-off publishing for AI-driven marketing teams.</p>
+        <div class="stack-tags">
+          <span>LLM</span><span>Social APIs</span><span>n8n</span><span>Node.js</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="earlier-list">
+      <div class="earlier-row">
+        <div class="name">Bespider Site Generators</div>
+        <div class="desc">Personal / portfolio / e-commerce site generators backed by a reusable template system &mdash; turnkey deployment.</div>
+      </div>
+      <div class="earlier-row">
+        <div class="name">Nayyar Builder Suite</div>
+        <div class="desc">WebPage, Widget, Query, Menu, Media, Mail, Layout &amp; Workflow Manager &mdash; all connected to a central user management system.</div>
+      </div>
+      <div class="earlier-row">
+        <div class="name">Payments &amp; Subscriptions</div>
+        <div class="desc">Stripe + PayPal integration, plan / subscription management &mdash; wired into Nayyar&rsquo;s builder and order workflows.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="contact-panel">
+      <div class="contact-copy">
+        <div class="eyebrow">Contact</div>
+        <h2>Let's build something that has to actually work in production.</h2>
+        <p>Based in Gujrat, Pakistan. Open to full-time roles and freelance / contract client work from <strong>October 2026</strong>.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn" href="mailto:alirazasaleem979111@gmail.com">alirazasaleem979111@gmail.com</a>
+        <a class="btn ghost mono" href="tel:+923249710976">+92 324 9710976</a>
+        <a class="btn ghost mono" href="https://www.linkedin.com/in/ali-raza-7ab721160" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+        <a class="btn ghost mono" href="https://alee-raza.com" target="_blank" rel="noopener">alee-raza.com &#8599;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Ali Raza Saleem &middot; Gujrat, Pakistan &middot; available from Oct 2026
+</footer>
+
+</body>
+</html>
