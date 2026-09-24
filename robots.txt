@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block AI scrapers that don't respect crawl-delay (optional)
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+
+Sitemap: https://alirazasaleem.github.io/sitemap.xml

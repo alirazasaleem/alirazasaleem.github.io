@@ -1,0 +1,11 @@
+/* TEAM */
+Developer & Maintainer: Ali Raza Saleem
+Site: https://alirazasaleem.github.io/
+LinkedIn: https://www.linkedin.com/in/ali-raza-7ab721160
+Email: alirazasaleem979111@gmail.com
+Location: Gujrat, Punjab, Pakistan
+
+/* SITE */
+Last update: 2026/09/24
+Standards: HTML5, CSS3
+Components: Inline SVG, Google Fonts (IBM Plex), JSON-LD
